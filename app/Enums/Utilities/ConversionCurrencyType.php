@@ -32,6 +32,29 @@ enum ConversionCurrencyType: string
         };
     }
 
+
+        /**
+     * Check if currency is supported by Frankfurter API
+     */
+    public function isSupportedByFrankfurter(): bool
+    {
+        return match ($this) {
+            self::USD, self::EUR, self::GBP, self::JPY => true,
+            self::MAD => false,
+        };
+    }
+
+    /**
+     * Get all currencies supported by Frankfurter
+     */
+    public static function frankfurterSupported(): array
+    {
+        return array_filter(
+            self::cases(),
+            fn(self $currency) => $currency->isSupportedByFrankfurter()
+        );
+    }
+    
     public function getCode(): string
     {
         return $this->value;

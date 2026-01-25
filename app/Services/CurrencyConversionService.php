@@ -13,7 +13,7 @@ class CurrencyConversionService
 {
     protected string $apiKey;
    // protected string $apiUrl = 'https://api.exchangerate-api.com/v4/latest/'; // or Frankfurter (Free, Unlimited) :"https://api.frankfurter.app/latest",
-    protected string $apiUrl = 'https://api.frankfurter.app/latest';
+   // protected string $apiUrl = 'https://api.frankfurter.app/latest';
     public function __construct()
     {
         //$this->apiKey = config('services.exchange_rate.api_key');
