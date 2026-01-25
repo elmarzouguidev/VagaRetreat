@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Enums\Tools;
+namespace App\Enums\Utilities;
 
-enum BankType: string
+enum AddressType: string
 {
-    case RIB = 'RIB';
-    case CARD = 'CARD';
+    case MANUAL = 'MANUAL';
+    case AUTOMATIC = 'AUTOMATIC';
 
     public function getColor(): string
     {
         return match ($this) {
-            BankType::RIB => 'bg-secondary',
-            BankType::CARD => 'bg-success',
+            AddressType::MANUAL => 'bg-secondary',
+            AddressType::AUTOMATIC => 'bg-success',
         };
     }
 
@@ -19,8 +19,8 @@ enum BankType: string
     {
         return match ($this) {
 
-            self::RIB => 'RIB',
-            self::CARD => 'CARD',
+            self::MANUAL => 'MANUAL',
+            self::AUTOMATIC => 'AUTOMATIC',
         };
     }
 

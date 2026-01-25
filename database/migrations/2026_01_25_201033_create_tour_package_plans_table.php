@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tour_plans', function (Blueprint $table) {
+        Schema::create('tour_package_plans', function (Blueprint $table) {
             $table->id();
             $table->uuid();
 
@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
 
-            $table->date('tour_date')->nullable();
-
+            $table->date('plan_date')->nullable();
             $table->time('start_at')->nullable();
             $table->time('end_at')->nullable();
 

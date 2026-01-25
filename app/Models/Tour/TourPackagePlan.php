@@ -7,7 +7,7 @@ use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TourPlan extends Model
+class TourPackagePlan extends Model
 {
     //
 
@@ -24,6 +24,9 @@ class TourPlan extends Model
     protected function casts(): array
     {
         return [
+            'plan_date' => 'date',
+            'start_at' => 'datetime',
+            'end_at' => 'datetime',
             'is_active' => 'boolean',
             'is_valid' => 'boolean',
         ];

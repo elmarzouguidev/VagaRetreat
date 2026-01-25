@@ -4,6 +4,7 @@ namespace App\Models\Tour;
 
 use App\Models\User;
 use App\Traits\GetModelByKeyName;
+use App\Traits\hasPrices;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,7 @@ class TourPackage extends Model
 
     use UuidGenerator;
     use GetModelByKeyName;
+    use hasPrices;
 
 
     public $slugName = 'title';
@@ -26,6 +28,8 @@ class TourPackage extends Model
     protected function casts(): array
     {
         return [
+            'start_at' => 'date',
+            'end_at' => 'date',
             'is_active' => 'boolean',
             'is_valid' => 'boolean',
         ];
@@ -38,6 +42,6 @@ class TourPackage extends Model
 
     public function tourPlans(): HasMany
     {
-        return $this->hasMany(TourPlan::class);
+        return $this->hasMany(TourPackagePlan::class);
     }
 }
