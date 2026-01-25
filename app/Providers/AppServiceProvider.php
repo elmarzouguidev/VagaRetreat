@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\Roles\RolesEnums;
 use Carbon\CarbonImmutable;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
@@ -37,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configurePasswordValidation();
         $this->configureFakePictureGenerator();
         $this->configureRateLimiter();
+        $this->configureGate();
     }
 
     private function addBooleanFields(): void
@@ -118,5 +121,14 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(100)->by($request->ip());
         });
     }
+
+    private function configureGate(): void
+    {
+
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole(RolesEnums::SUPERADMIN) ? true : null;
+        });
+    }
+
     private function defineObservers(): void {}
 }
