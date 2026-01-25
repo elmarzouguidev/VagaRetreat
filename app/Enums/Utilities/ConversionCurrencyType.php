@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Enums\Utilities;
+
+enum ConversionCurrencyType: string
+{
+    case USD = 'USD';
+    case EUR = 'EUR';
+    case MAD = 'MAD';
+    case GBP = 'GBP';
+    case JPY = 'JPY';
+
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::USD => 'US Dollar',
+            self::EUR => 'Euro',
+            self::MAD => 'Moroccan Dirham',
+            self::GBP => 'British Pound',
+            self::JPY => 'Japanese Yen',
+        };
+    }
+
+    public function getSymbol(): string
+    {
+        return match ($this) {
+            self::USD => '$',
+            self::EUR => '€',
+            self::MAD => 'DH',
+            self::GBP => '£',
+            self::JPY => '¥',
+        };
+    }
+
+    public function getCode(): string
+    {
+        return $this->value;
+    }
+
+    /**
+     * Get decimal places for currency (some currencies don't use decimals)
+     */
+    public function getDecimals(): int
+    {
+        return match ($this) {
+            self::JPY => 0, // Yen doesn't use decimals
+            default => 2,
+        };
+    }
+
+    /**
+     * Get the smallest unit divisor (e.g., 100 for cents, 1 for yen)
+     */
+    public function getDivisor(): int
+    {
+        return match ($this) {
+            self::JPY => 1,
+            default => 100,
+        };
+    }
+
+    /**
+     * Format amount with currency symbol
+     */
+    public function format(int|float $amount, bool $showCode = false): string
+    {
+        $value = $amount / $this->getDivisor();
+        $formatted = number_format($value, $this->getDecimals());
+
+        return match ($this) {
+            self::USD, self::GBP => $this->getSymbol() . $formatted . ($showCode ? ' ' . $this->value : ''),
+            self::EUR => $this->getSymbol() . $formatted . ($showCode ? ' ' . $this->value : ''),
+            self::MAD, self::JPY => $formatted . ' ' . $this->getSymbol() . ($showCode ? ' (' . $this->value . ')' : ''),
+        };
+    }
+
+    /**
+     * Format amount with locale support
+     */
+    public function formatLocalized(int|float $amount, $locale = null): string
+    {
+        $locale = $locale ?? app()->getLocale();
+        $value = $amount / $this->getDivisor();
+
+        $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+        return $formatter->formatCurrency($value, $this->value);
+    }
+
+    public static function options(): array
+    {
+        return collect(self::cases())
+            ->mapWithKeys(fn(self $type) => [
+                $type->value => $type->getLabel(),
+            ])
+            ->toArray();
+    }
+
+    public static function fromSymbol(string $symbol): ?self
+    {
+        return collect(self::cases())
+            ->first(fn(self $type) => $type->getSymbol() === $symbol);
+    }
+
+    /**
+     * Get all currency codes
+     */
+    public static function codes(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
+}

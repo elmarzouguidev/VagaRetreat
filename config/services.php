@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'exchange_rate' => [
+        'api_key' => env('EXCHANGE_RATE_API_KEY'),
+        'cache_duration' => env('EXCHANGE_RATE_CACHE_DURATION', 3600), // 1 hour
+        'default_currency' => env('DEFAULT_CURRENCY', 'USD'),
+    ],
+
 ];
