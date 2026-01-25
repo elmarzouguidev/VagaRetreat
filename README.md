@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://wedoapp.ma" target="_blank">
-<img src="./logo.png" width='20%' >
+<img src="./logo.png" width='30%' >
 </a>
 </p>
 # Tour Agency Management System
