@@ -52,11 +52,11 @@ class ExchangeRate extends Model
         });
     }
 
-    /**
-     * Get inverse rate
+ /**
+     * Accessor for Inverse Rate: 1 / rate
      */
     public function getInverseRateAttribute(): float
     {
-        return 1 / $this->rate;
+        return $this->rate > 0 ? (1 / $this->rate) : 0.0;
     }
 }

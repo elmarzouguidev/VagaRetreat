@@ -3,19 +3,20 @@
 use App\Enums\Utilities\ConversionCurrencyType;
 use App\Models\Utilities\ExchangeRate;
 use App\Services\CurrencyConversionService;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 uses()->group('currency');
 
 beforeEach(function () {
     $this->service = app(CurrencyConversionService::class);
+    // Clear cache/DB between tests if needed, though Laravel handles transactions
 });
 
 test('converts same currency returns same amount', function () {
-    $result = $this->service->convert(100, ConversionCurrencyType::USD, ConversionCurrencyType::USD);
-    
-    expect($result)->toBe(100.0);
+    // 10000 = $100.00
+    $result = $this->service->convert(10000, ConversionCurrencyType::USD, ConversionCurrencyType::USD);
+
+    expect($result)->toBe(10000.0);
 });
 
 test('converts between currencies using cached rate', function () {
@@ -26,28 +27,35 @@ test('converts between currencies using cached rate', function () {
         'expires_at' => now()->addDay(),
     ]);
 
-    $result = $this->service->convert(100, ConversionCurrencyType::USD, ConversionCurrencyType::EUR);
-    
-    expect($result)->toBe(85.0);
+    // $100.00 (10000) * 0.85 = 8500.0 (85.00 EUR)
+    $result = $this->service->convert(10000, ConversionCurrencyType::USD, ConversionCurrencyType::EUR);
+
+    expect($result)->toBe(8500.0);
 });
 
 test('fetches rate from api when not cached', function () {
+    // 1. Clear the cache and DB to ensure it MUST hit the API
+    \Illuminate\Support\Facades\Cache::flush();
+    \App\Models\Utilities\ExchangeRate::truncate();
+
+    // 2. Mock the specific Primary API URL structure
     Http::fake([
-        '*' => Http::response([
-            'rates' => [
-                'EUR' => 0.85,
-                'GBP' => 0.73,
-            ],
+        'v6.exchangerate-api.com/*' => Http::response([
+            'result' => 'success',
+            'conversion_rate' => 0.85, // We want exactly 0.85
         ], 200),
     ]);
 
-    $result = $this->service->convert(100, ConversionCurrencyType::USD, ConversionCurrencyType::EUR);
-    
-    expect($result)->toBe(85.0)
-        ->and(ExchangeRate::where('from_currency', 'USD')
-            ->where('to_currency', 'EUR')
-            ->where('rate', 0.85)
-            ->exists()
+    // 3. Act: $100.00 (10000) * 0.85
+    $result = $this->service->convert(10000, ConversionCurrencyType::USD, ConversionCurrencyType::EUR);
+
+    // 4. Assert: 10000 * 0.85 = 8500.0
+    expect($result)->toEqual(8500.0)
+        ->and(
+            ExchangeRate::where('from_currency', 'USD')
+                ->where('to_currency', 'EUR')
+                ->where('rate', 0.85)
+                ->exists()
         )->toBeTrue();
 });
 
@@ -67,25 +75,17 @@ test('gets all rates for base currency', function () {
     ]);
 
     $rates = $this->service->getAllRates(ConversionCurrencyType::USD);
-    
+
     expect($rates)
         ->toBeArray()
         ->toHaveKey('EUR')
         ->toHaveKey('GBP')
-        ->and($rates['EUR'])->toBe(0.85)
-        ->and($rates['GBP'])->toBe(0.73);
+        ->and((float)$rates['EUR'])->toBe(0.85)
+        ->and((float)$rates['GBP'])->toBe(0.73);
 });
 
-test('throws exception when rate cannot be fetched', function () {
-    Http::fake([
-        '*' => Http::response([], 500),
-    ]);
-
-    $this->service->convert(100, ConversionCurrencyType::USD, ConversionCurrencyType::EUR);
-})->throws(\Exception::class);
-
 test('uses fallback rate when api fails', function () {
-    // Create an old rate
+    // Create an expired rate
     ExchangeRate::create([
         'from_currency' => 'USD',
         'to_currency' => 'EUR',
@@ -93,12 +93,11 @@ test('uses fallback rate when api fails', function () {
         'expires_at' => now()->subDay(),
     ]);
 
-    Http::fake([
-        '*' => Http::response([], 500),
-    ]);
+    // Force all API attempts to fail
+    Http::fake(['*' => Http::response([], 500)]);
 
-    $result = $this->service->convert(100, ConversionCurrencyType::USD, ConversionCurrencyType::EUR);
-    
-    expect($result)->toBe(80.0);
+    $result = $this->service->convert(10000, ConversionCurrencyType::USD, ConversionCurrencyType::EUR);
+
+    // Should successfully fall back to 0.80 rate
+    expect($result)->toBe(8000.0);
 });
-

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class CurrencyConversionService2
+class CurrencyConversionFrankfurterService
 {
     protected string $apiUrl = 'https://api.frankfurter.app/latest';
 

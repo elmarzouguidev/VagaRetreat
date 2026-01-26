@@ -52,5 +52,7 @@ test('calculates inverse rate', function () {
         'expires_at' => now()->addDay(),
     ]);
 
-    expect($rate->inverse_rate)->toBeCloseTo(1.176, 0.001);
+    // 1 / 0.85 = 1.17647...
+    // We expect 1.176 with a delta of 0.001 to allow for the precision
+    expect($rate->inverse_rate)->toEqualWithDelta(1.176, 0.001);
 });

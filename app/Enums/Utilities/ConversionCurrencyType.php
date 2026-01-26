@@ -33,7 +33,7 @@ enum ConversionCurrencyType: string
     }
 
 
-        /**
+    /**
      * Check if currency is supported by Frankfurter API
      */
     public function isSupportedByFrankfurter(): bool
@@ -54,7 +54,7 @@ enum ConversionCurrencyType: string
             fn(self $currency) => $currency->isSupportedByFrankfurter()
         );
     }
-    
+
     public function getCode(): string
     {
         return $this->value;
@@ -66,7 +66,7 @@ enum ConversionCurrencyType: string
     public function getDecimals(): int
     {
         return match ($this) {
-            self::JPY => 0, // Yen doesn't use decimals
+            self::JPY => 0,
             default => 2,
         };
     }
@@ -83,29 +83,35 @@ enum ConversionCurrencyType: string
     }
 
     /**
-     * Format amount with currency symbol
+     * Optimized Format Method
      */
     public function format(int|float $amount, bool $showCode = false): string
     {
         $value = $amount / $this->getDivisor();
-        $formatted = number_format($value, $this->getDecimals());
+        $formatted = number_format($value, $this->getDecimals(), '.', ',');
 
         return match ($this) {
-            self::USD, self::GBP => $this->getSymbol() . $formatted . ($showCode ? ' ' . $this->value : ''),
-            self::EUR => $this->getSymbol() . $formatted . ($showCode ? ' ' . $this->value : ''),
-            self::MAD, self::JPY => $formatted . ' ' . $this->getSymbol() . ($showCode ? ' (' . $this->value . ')' : ''),
+            // Symbol FIRST: $1,234.56
+            self::USD, self::GBP, self::EUR =>
+            $this->getSymbol() . $formatted . ($showCode ? ' ' . $this->value : ''),
+
+            // Symbol LAST: 1,234.56 DH or 1,234 ¥
+            self::MAD, self::JPY =>
+            $formatted . ' ' . $this->getSymbol() . ($showCode ? ' (' . $this->value . ')' : ''),
         };
     }
-
     /**
-     * Format amount with locale support
+     * Enhanced Localized Formatting
+     * Handles the Moroccan Dirham Arabic vs Latin script automatically
      */
-    public function formatLocalized(int|float $amount, $locale = null): string
+    public function formatLocalized(int|float $amount, ?string $locale = null): string
     {
         $locale = $locale ?? app()->getLocale();
         $value = $amount / $this->getDivisor();
 
         $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+
+        // Ensure MAD displays as "MAD" or "DH" instead of "د.م." if desired
         return $formatter->formatCurrency($value, $this->value);
     }
 

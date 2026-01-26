@@ -5,18 +5,22 @@ namespace App\Models\Tour;
 use App\Models\User;
 use App\Traits\GetModelByKeyName;
 use App\Traits\hasPrices;
+use App\Traits\HasSlug;
 use App\Traits\UuidGenerator;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TourPackage extends Model
 {
-    //
+    /** @use HasFactory<\Database\Factories\Tour\TourPackageFactory> */
+    use HasFactory;
 
     use UuidGenerator;
     use GetModelByKeyName;
     use hasPrices;
+    use HasSlug;
 
 
     public $slugName = 'title';

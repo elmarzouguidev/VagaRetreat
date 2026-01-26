@@ -1,16 +1,16 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Utilities;
 
-use App\Enums\Utilities\CurrencyType;
+use App\Enums\Utilities\ConversionCurrencyType;
 use App\Models\Tour\TourPackage;
-use App\Models\Utilities\Price;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Utilities\Price>
+ */
 class PriceFactory extends Factory
 {
-    protected $model = Price::class;
-
     public function definition(): array
     {
         return [
@@ -19,7 +19,7 @@ class PriceFactory extends Factory
             'name' => $this->faker->words(3, true),
             'slug' => $this->faker->slug(),
             'amount' => $this->faker->numberBetween(1000, 100000),
-            'currency' => $this->faker->randomElement(CurrencyType::cases()),
+            'currency' => $this->faker->randomElement(ConversionCurrencyType::cases()),
             'expired_at' => $this->faker->optional()->dateTimeBetween('now', '+1 year'),
             'options' => null,
             'is_active' => true,

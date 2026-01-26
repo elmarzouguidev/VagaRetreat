@@ -46,6 +46,8 @@ trait PricesWithConversion
     public function convertTo(ConversionCurrencyType $targetCurrency): array
     {
         $service = app(CurrencyConversionService::class);
+
+        // This returns the amount in cents (e.g., 98700 for 987.00 DH)
         $convertedAmount = $service->convert(
             $this->amount,
             $this->currency,
@@ -55,7 +57,8 @@ trait PricesWithConversion
         return [
             'amount' => $convertedAmount,
             'currency' => $targetCurrency,
-            'formatted' => $targetCurrency->format($convertedAmount * $targetCurrency->getDivisor()),
+            // FIX: Removed the extra multiplication by divisor
+            'formatted' => $targetCurrency->format($convertedAmount),
             'exchange_rate' => $service->getExchangeRate($this->currency, $targetCurrency),
         ];
     }
