@@ -87,10 +87,14 @@ Private project. Intended for institutional use only.
 | :--- | :--- |
 | **Home Page** | ![Home Page](ART/screen-1.png) |
 | **Tours Discovery** | ![Tours Discovery](ART/screen-2.png) |
+| **Tour Detail - Accommodations** | ![Accommodations Tab](ART/screen-7.png) |
+| **Tour Detail - Instructors** | ![Instructors Tab](ART/screen-8.png) |
+| **Tour Detail - Itinerary** | ![Itinerary Tab](ART/screen-9.png) |
 | **Dynamic Booking - Step 1** | ![Booking Step 1](ART/screen-3.png) |
 | **Dynamic Booking - Step 2** | ![Booking Step 2](ART/screen-4.png) |
 | **Dynamic Booking - Step 3** | ![Booking Step 3](ART/screen-5.png) |
 | **Dynamic Booking - Step 4** | ![Booking Step 4](ART/screen-6.png) |
+
 
 ---
 *Built with passion for the next generation of travel.*
