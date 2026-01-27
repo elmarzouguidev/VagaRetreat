@@ -9,15 +9,15 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* Uptrek Color Palette */
-    --color-uptrek-red: #DA1D25;
-    --color-uptrek-red-dark: #b3161d;
-    --color-uptrek-black: #1A1A1A;
-    --color-uptrek-gray: #F4F5F7;
-    --color-uptrek-dark-gray: #4A4A4A;
-    --color-uptrek-light-gray: #E5E7EB;
+    /* Vaga Color Palette */
+    --color-elmarzouguidev-vaga-red: #DA1D25;
+    --color-elmarzouguidev-vaga-red-dark: #b3161d;
+    --color-elmarzouguidev-vaga-black: #1A1A1A;
+    --color-elmarzouguidev-vaga-gray: #F4F5F7;
+    --color-elmarzouguidev-vaga-dark-gray: #4A4A4A;
+    --color-elmarzouguidev-vaga-light-gray: #E5E7EB;
     
     /* Semantic Colors */
-    --color-primary: var(--color-uptrek-red);
-    --color-surface: var(--color-uptrek-gray);
+    --color-primary: var(--color-elmarzouguidev-vaga-red);
+    --color-surface: var(--color-elmarzouguidev-vaga-gray);
 }

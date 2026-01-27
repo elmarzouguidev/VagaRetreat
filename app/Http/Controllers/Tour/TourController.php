@@ -52,7 +52,7 @@ class TourController extends Controller
 
     public function show(TourPackage $tour)
     {
-        $tour->load(['categories:id,name,slug', 'cities:id,name,slug,country_id', 'prices','cities.country:id,name,slug']);
+        $tour->load(['categories:id,name,slug', 'cities:id,name,slug,country_id', 'prices','cities.country:id,name,slug', 'accommodations.amenities', 'accommodations.media']);
         if (request()->wantsJson()) {
             return response()->json($tour);
         }

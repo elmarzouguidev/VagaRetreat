@@ -4,27 +4,27 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-bold tracking-tighter text-uptrek-black">
-                        Uptrek<span class="text-uptrek-red">.</span>
+                    <span class="text-2xl font-bold tracking-tighter text-elmarzouguidev-vaga-black">
+                        VagaRetreat<span class="text-elmarzouguidev-vaga-red">.</span>
                     </span>
                 </a>
             </div>
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex md:items-center md:space-x-8">
-                <a href="{{ route('home') }}" class="text-gray-600 hover:text-uptrek-red font-medium transition duration-150">Home</a>
-                <a href="#" class="text-gray-600 hover:text-uptrek-red font-medium transition duration-150">Destinations</a>
-                <a href="#" class="text-gray-600 hover:text-uptrek-red font-medium transition duration-150">Styles</a>
-                <a href="#" class="text-gray-600 hover:text-uptrek-red font-medium transition duration-150">Instructors</a>
+                <a href="{{ route('home') }}" class="text-gray-600 hover:text-elmarzouguidev-vaga-red font-medium transition duration-150">Home</a>
+                <a href="#" class="text-gray-600 hover:text-elmarzouguidev-vaga-red font-medium transition duration-150">Destinations</a>
+                <a href="#" class="text-gray-600 hover:text-elmarzouguidev-vaga-red font-medium transition duration-150">Styles</a>
+                <a href="#" class="text-gray-600 hover:text-elmarzouguidev-vaga-red font-medium transition duration-150">Instructors</a>
                 
-                <a href="#" class="inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-uptrek-red hover:bg-uptrek-red-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-uptrek-red transition-colors duration-200">
+                <a href="#" class="inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-elmarzouguidev-vaga-red hover:bg-elmarzouguidev-vaga-red-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-elmarzouguidev-vaga-red transition-colors duration-200">
                     Find a Tour
                 </a>
             </div>
 
             <!-- Mobile Menu Button -->
             <div class="flex items-center md:hidden">
-                <button type="button" @click="mobileMenuOpen = !mobileMenuOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-uptrek-red">
+                <button type="button" @click="mobileMenuOpen = !mobileMenuOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-elmarzouguidev-vaga-red">
                     <span class="sr-only">Open main menu</span>
                     <!-- Icon when menu is closed -->
                     <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,12 +42,12 @@
     <!-- Mobile Menu -->
     <div x-show="mobileMenuOpen" x-transition x-cloak class="md:hidden border-t border-gray-100">
         <div class="pt-2 pb-3 space-y-1 px-4">
-            <a href="{{ route('home') }}" class="block pl-3 pr-4 py-2 border-l-4 border-uptrek-red text-base font-medium text-uptrek-red bg-red-50">Home</a>
+            <a href="{{ route('home') }}" class="block pl-3 pr-4 py-2 border-l-4 border-elmarzouguidev-vaga-red text-base font-medium text-elmarzouguidev-vaga-red bg-red-50">Home</a>
             <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300">Destinations</a>
             <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300">Styles</a>
             <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300">Instructors</a>
             <div class="pt-4 pb-2">
-                <a href="#" class="block w-full text-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-uptrek-red hover:bg-uptrek-red-dark">
+                <a href="#" class="block w-full text-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-elmarzouguidev-vaga-red hover:bg-elmarzouguidev-vaga-red-dark">
                     Find a Tour
                 </a>
             </div>

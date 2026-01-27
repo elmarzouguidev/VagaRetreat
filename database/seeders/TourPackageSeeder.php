@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Tour\TourPackage;
 use App\Models\User;
+use App\Models\Utilities\Amenity;
 use App\Models\Utilities\Category;
 use App\Models\Utilities\City;
 use App\Models\Utilities\Price;
@@ -20,7 +21,7 @@ class TourPackageSeeder extends Seeder
         // Ensure we have a user to own these tours
         $user = User::first() ?? User::factory()->create([
             'name' => 'Tour Admin',
-            'email' => 'admin@uptrek.com',
+            'email' => 'admin@vaga-retreat.com',
         ]);
 
         $tours = [
@@ -113,6 +114,7 @@ class TourPackageSeeder extends Seeder
                     'quantity' => 5,
                     'description' => 'Comfortable shared accommodation with modern amenities.',
                     'sort_order' => 1,
+                    'amenities' => ['wifi', 'terrace'],
                 ],
                 [
                     'name' => 'Private Single Room',
@@ -120,6 +122,7 @@ class TourPackageSeeder extends Seeder
                     'quantity' => 2,
                     'description' => 'A quiet and private room for solo travelers.',
                     'sort_order' => 2,
+                    'amenities' => ['wifi', 'parking', 'terrace', 'wheelchair-accessible']
                 ],
                 [
                     'name' => 'Eco-Friendly Cabin',
@@ -127,6 +130,7 @@ class TourPackageSeeder extends Seeder
                     'quantity' => 3,
                     'description' => 'Sustainable lodging with a beautiful view.',
                     'sort_order' => 3,
+                    'amenities' => ['wifi', 'parking', 'swimming-pool', 'spa', 'gym', 'restaurant', 'bar', 'room-service', '24-7-front-desk']
                 ],
                 [
                     'name' => 'Deluxe Suite',
@@ -134,11 +138,30 @@ class TourPackageSeeder extends Seeder
                     'quantity' => 2,
                     'description' => 'Premium suite with extra space and luxury features.',
                     'sort_order' => 4,
+                    'amenities' => ['wifi', 'parking', 'swimming-pool', 'spa', 'gym', 'restaurant', '24-7-front-desk']
                 ],
             ];
 
             foreach ($accommodationTypes as $accData) {
+
+                $amenitySlugs = $accData['amenities'];
+
+                unset($accData['amenities']);
+
                 $accommodation = $tour->accommodations()->create($accData);
+
+                // Add sample images to accommodation
+                $sampleImages = [
+                    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800',
+                    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=800',
+                    'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&q=80&w=800'
+                ];
+
+                foreach($sampleImages as $imageUrl) {
+                    $accommodation->addMediaFromUrl($imageUrl)
+                        ->preservingOriginal()
+                        ->toMediaCollection('accommodation_images');
+                }
 
                 // Add price for the accommodation
                 $accommodation->prices()->create([
@@ -147,6 +170,10 @@ class TourPackageSeeder extends Seeder
                     'is_active' => true,
                     'is_default' => true,
                 ]);
+
+                // Attach amenities
+                $amenities = Amenity::whereIn('slug', $amenitySlugs)->get();
+                $accommodation->amenities()->syncWithoutDetaching($amenities->pluck('id'));
             }
         }
     }

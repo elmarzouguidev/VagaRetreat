@@ -3,6 +3,7 @@
 namespace App\Models\Tour;
 
 use App\Models\User;
+use App\Models\Utilities\Amenity;
 use App\Models\Utilities\Category;
 use App\Models\Utilities\City;
 use App\Traits\canBeBooked;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -73,6 +75,7 @@ class TourPackage extends Model  implements HasMedia
         return $this->belongsToMany(Category::class, 'category_tour_package');
     }
 
+ 
 
     public function registerMediaCollections(): void
     {

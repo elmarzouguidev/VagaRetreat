@@ -12,7 +12,7 @@
         @if ($tour->is_featured)
             <div class="absolute top-4 left-4">
                 <span
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-uptrek-red shadow-sm">
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-elmarzouguidev-vaga-red shadow-sm">
                     Featured
                 </span>
             </div>
@@ -53,7 +53,7 @@
 
         <!-- Title -->
         <h3 class="text-lg font-bold text-gray-900 mb-2 leading-tight">
-            <a href="{{ route('tours.show', $tour) }}" class="hover:text-uptrek-red transition-colors">
+            <a href="{{ route('tours.show', $tour) }}" class="hover:text-elmarzouguidev-vaga-red transition-colors">
                 {{ $tour->title }}
             </a>
         </h3>
@@ -91,7 +91,7 @@
             </div>
             <div class="text-right">
                 <p class="text-xs text-gray-500">From</p>
-                <p class="text-lg font-bold text-uptrek-red">
+                <p class="text-lg font-bold text-elmarzouguidev-vaga-red">
                     {{ $tour->prices->first()->formatted_price }}
                 </p>
             </div>

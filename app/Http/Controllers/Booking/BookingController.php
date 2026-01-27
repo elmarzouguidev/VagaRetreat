@@ -23,6 +23,7 @@ class BookingController extends Controller
      */
     public function create(TourPackage $tour)
     {
+        $tour->load(['accommodations.prices', 'prices']);
         return view('bookings.create', ['tour' => $tour]);
     }
 

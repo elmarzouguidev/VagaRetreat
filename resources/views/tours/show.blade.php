@@ -10,7 +10,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     @if ($tour->is_featured)
                         <span
-                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-uptrek-red text-white mb-4">
+                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-elmarzouguidev-vaga-red text-white mb-4">
                             Featured Retreat
                         </span>
                     @endif
@@ -20,7 +20,7 @@
                     <div
                         class="flex flex-wrap items-center text-white text-sm md:text-base space-y-2 md:space-y-0 md:space-x-8">
                         <div class="flex items-center mr-6">
-                            <svg class="w-5 h-5 mr-2 text-uptrek-red" fill="none" stroke="currentColor"
+                            <svg class="w-5 h-5 mr-2 text-elmarzouguidev-vaga-red" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
@@ -31,7 +31,7 @@
                             {{ $tour->cities->first()?->country?->name ?? 'Various Locations' }}
                         </div>
                         <div class="flex items-center mr-6">
-                            <svg class="w-5 h-5 mr-2 text-uptrek-red" fill="none" stroke="currentColor"
+                            <svg class="w-5 h-5 mr-2 text-elmarzouguidev-vaga-red" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -66,22 +66,22 @@
                     <div class="border-b border-gray-200 mb-8 sticky top-0 bg-white z-10">
                         <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                             <button @click="activeTab = 'overview'"
-                                :class="{ 'border-uptrek-red text-uptrek-red': activeTab === 'overview', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'overview' }"
+                                :class="{ 'border-elmarzouguidev-vaga-red text-elmarzouguidev-vaga-red': activeTab === 'overview', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'overview' }"
                                 class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
                                 Overview
                             </button>
                             <button @click="activeTab = 'itinerary'"
-                                :class="{ 'border-uptrek-red text-uptrek-red': activeTab === 'itinerary', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'itinerary' }"
+                                :class="{ 'border-elmarzouguidev-vaga-red text-elmarzouguidev-vaga-red': activeTab === 'itinerary', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'itinerary' }"
                                 class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
                                 Itinerary
                             </button>
                             <button @click="activeTab = 'accommodation'"
-                                :class="{ 'border-uptrek-red text-uptrek-red': activeTab === 'accommodation', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'accommodation' }"
+                                :class="{ 'border-elmarzouguidev-vaga-red text-elmarzouguidev-vaga-red': activeTab === 'accommodation', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'accommodation' }"
                                 class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
                                 Accommodation
                             </button>
                             <button @click="activeTab = 'instructor'"
-                                :class="{ 'border-uptrek-red text-uptrek-red': activeTab === 'instructor', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'instructor' }"
+                                :class="{ 'border-elmarzouguidev-vaga-red text-elmarzouguidev-vaga-red': activeTab === 'instructor', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'instructor' }"
                                 class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
                                 Instructor
                             </button>
@@ -141,7 +141,7 @@
                             <!-- Day 1 -->
                             <div class="relative pl-8">
                                 <div
-                                    class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-uptrek-red border-4 border-white">
+                                    class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-elmarzouguidev-vaga-red border-4 border-white">
                                 </div>
                                 <h3 class="text-lg font-bold text-gray-900">Day 1: Arrival & Welcome Dinner</h3>
                                 <p class="mt-2 text-gray-600">Arrive at the destination and transfer to your hotel.
@@ -167,18 +167,69 @@
                                 @foreach ($tour->accommodations as $accom)
                                     <div
                                         class="flex flex-col md:flex-row bg-white rounded-lg border border-gray-200 overflow-hidden">
-                                        <div class="md:w-1/3 bg-gray-100 min-h-[200px]">
-                                            <!-- Placeholder for accommodation image -->
-                                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                                                alt="{{ $accom->name }}" class="w-full h-full object-cover">
+                                        <div class="md:w-1/3 bg-gray-100 min-h-[200px] relative overflow-hidden" 
+                                             x-data="{ 
+                                                currentSlide: 0, 
+                                                slidesCount: {{ $accom->media->count() }},
+                                                next() { this.currentSlide = (this.currentSlide + 1) % this.slidesCount },
+                                                prev() { this.currentSlide = (this.currentSlide - 1 + this.slidesCount) % this.slidesCount }
+                                             }">
+                                            <!-- Slider Wrapper -->
+                                            <div class="relative w-full h-full min-h-[200px]">
+                                                @forelse($accom->getMedia('accommodation_images') as $index => $media)
+                                                    <div x-show="currentSlide === {{ $index }}" 
+                                                         x-transition:enter="transition ease-out duration-300"
+                                                         x-transition:enter-start="opacity-0 transform scale-95"
+                                                         x-transition:enter-end="opacity-100 transform scale-100"
+                                                         class="absolute inset-0 w-full h-full">
+                                                        <img src="{{ $media->getUrl() }}" alt="{{ $accom->name }}" class="w-full h-full object-cover">
+                                                    </div>
+                                                @empty
+                                                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                                        alt="{{ $accom->name }}" class="w-full h-full object-cover">
+                                                @endforelse
+                                            </div>
+
+                                            <!-- Navigation Arrows -->
+                                            @if($accom->getMedia('accommodation_images')->count() > 1)
+                                                <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-1 transition-colors z-10">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                                </button>
+                                                <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-1 transition-colors z-10">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                                </button>
+
+                                                <!-- Indicators -->
+                                                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1 z-10">
+                                                    @foreach($accom->getMedia('accommodation_images') as $index => $media)
+                                                        <button @click="currentSlide = {{ $index }}" 
+                                                                :class="currentSlide === {{ $index }} ? 'bg-white w-3' : 'bg-white/50 w-1.5'"
+                                                                class="h-1.5 rounded-full transition-all duration-300"></button>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="p-6 md:w-2/3">
                                             <h3 class="text-xl font-bold text-gray-900">{{ $accom->name }}</h3>
                                             <p class="text-sm text-gray-500 mb-4">{{ $accom->quantity }} rooms
                                                 available</p>
-                                            <p class="text-gray-600">
+                                            <p class="text-gray-600 mb-4">
                                                 {{ $accom->description ?? 'Comfortable and spacious accommodation designed for relaxation.' }}
                                             </p>
+                                            
+                                            <!-- Amenities -->
+                                            @if($accom->amenities->isNotEmpty())
+                                            <div class="flex flex-wrap gap-2">
+                                                @foreach($accom->amenities as $amenity)
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                                        @if($amenity->icon)
+                                                            <i class="fas fa-{{ $amenity->icon }} mr-1"></i>
+                                                        @endif
+                                                        {{ $amenity->name }}
+                                                    </span>
+                                                @endforeach
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -197,13 +248,13 @@
                                 src="https://ui-avatars.com/api/?name=Instructor+Name&size=200" alt="Instructor">
                             <div>
                                 <h3 class="text-xl font-bold text-gray-900">Expert Instructor</h3>
-                                <p class="text-uptrek-red font-medium mb-4">Yoga & Meditation Expert</p>
+                                <p class="text-elmarzouguidev-vaga-red font-medium mb-4">Yoga & Meditation Expert</p>
                                 <p class="text-gray-600 mb-4">
                                     With over 10 years of experience leading retreats around the world, our instructor
                                     brings a wealth of knowledge and passion to every trip.
                                 </p>
                                 <div class="flex justify-center md:justify-start space-x-4">
-                                    <a href="#" class="text-gray-400 hover:text-uptrek-red"><span
+                                    <a href="#" class="text-gray-400 hover:text-elmarzouguidev-vaga-red"><span
                                             class="sr-only">Instagram</span><svg class="h-6 w-6" fill="currentColor"
                                             viewBox="0 0 24 24">
                                             <path
@@ -224,7 +275,7 @@
                                 <div class="flex justify-between items-baseline mb-4">
                                     <span class="text-sm text-gray-500">Starting from</span>
                                     @foreach ($tour->prices as $price)
-                                        <span class="text-2xl font-bold text-uptrek-red">
+                                        <span class="text-2xl font-bold text-elmarzouguidev-vaga-red">
                                             {{ $price->formatted_price }}
                                             <span class="text-sm text-gray-800">{{ $price->name ?? '' }}</span>
                                         </span>
@@ -263,7 +314,7 @@
                                 </div>
 
                                 <a href="{{ route('bookings.create', $tour) }}"
-                                    class="w-full bg-uptrek-red text-white font-bold py-4 px-6 rounded-md hover:bg-uptrek-red-dark transition-colors duration-200 shadow-md text-lg block text-center">
+                                    class="w-full bg-elmarzouguidev-vaga-red text-white font-bold py-4 px-6 rounded-md hover:bg-elmarzouguidev-vaga-red-dark transition-colors duration-200 shadow-md text-lg block text-center">
                                     Check Availability
                                 </a>
 

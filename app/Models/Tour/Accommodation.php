@@ -7,6 +7,7 @@ use App\Traits\HasSlug;
 use App\Traits\UuidGenerator;
 use App\Traits\canBeBooked;
 use App\Traits\hasPrices;
+use App\Traits\hasAmenities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,6 +22,7 @@ class Accommodation extends Model implements HasMedia
     use UuidGenerator;
     use GetModelByKeyName;
     use hasPrices;
+    use hasAmenities;
     use canBeBooked;
     use HasSlug;
     use InteractsWithMedia;

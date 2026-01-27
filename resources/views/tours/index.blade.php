@@ -8,7 +8,7 @@
                     <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sticky top-8">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-lg font-bold text-gray-900">Filters</h2>
-                            <a href="{{ route('api.search.index') }}" class="text-xs text-uptrek-red hover:underline">Reset</a>
+                            <a href="{{ route('api.search.index') }}" class="text-xs text-elmarzouguidev-vaga-red hover:underline">Reset</a>
                         </div>
                         
                         <form action="{{ route('api.search.index') }}" method="GET">
@@ -18,7 +18,7 @@
                                 <div class="space-y-2">
                                     @foreach($countries as $country)
                                         <label class="flex items-center">
-                                            <input type="checkbox" name="filter[country][]" value="{{$country->slug}}" class="rounded border-gray-300 text-uptrek-red focus:ring-uptrek-red h-4 w-4"
+                                            <input type="checkbox" name="filter[country][]" value="{{$country->slug}}" class="rounded border-gray-300 text-elmarzouguidev-vaga-red focus:ring-elmarzouguidev-vaga-red h-4 w-4"
                                               @checked(in_array($country->slug, request()->input('filter.country', [])))>
                                             <span class="ml-2 text-sm text-gray-600">{{$country->name}}</span>
                                         </label>
@@ -32,7 +32,7 @@
                                 <div class="space-y-2">
                                     @foreach ($activities as $activity )
                                     <label class="flex items-center">
-                                        <input type="checkbox" name="filter[category][]" value="{{$activity->slug}}" class="rounded border-gray-300 text-uptrek-red focus:ring-uptrek-red h-4 w-4"
+                                        <input type="checkbox" name="filter[category][]" value="{{$activity->slug}}" class="rounded border-gray-300 text-elmarzouguidev-vaga-red focus:ring-elmarzouguidev-vaga-red h-4 w-4"
                                             @checked(in_array($activity->slug, request()->input('filter.category', [])))
                                             >
                                         <span class="ml-2 text-sm text-gray-600">{{$activity->name}}</span>
@@ -44,9 +44,9 @@
                             <!-- Date Filter -->
                             <div class="mb-6">
                                 <h3 class="text-sm font-semibold text-gray-900 mb-3">Dates</h3>
-                                <input type="date" name="filter[starts_after]" class="block w-full text-sm border-gray-300 rounded-md focus:ring-uptrek-red focus:border-uptrek-red mb-2"
+                                <input type="date" name="filter[starts_after]" class="block w-full text-sm border-gray-300 rounded-md focus:ring-elmarzouguidev-vaga-red focus:border-elmarzouguidev-vaga-red mb-2"
                                     value="{{ request()->input('filter.starts_after') }}">
-                                <input type="date" name="filter[ends_before]" class="block w-full text-sm border-gray-300 rounded-md focus:ring-uptrek-red focus:border-uptrek-red"
+                                <input type="date" name="filter[ends_before]" class="block w-full text-sm border-gray-300 rounded-md focus:ring-elmarzouguidev-vaga-red focus:border-elmarzouguidev-vaga-red"
                                     value="{{ request()->input('filter.ends_before') }}">
                             </div>
 
