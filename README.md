@@ -22,6 +22,13 @@ VagaRetreat is a state-of-the-art tour agency management system designed for hig
 - **Personalized Guest Details**: Secure collection of essential guest information and special retreat requests.
 - **Unique Booking References**: Automated generation of reference codes for easy tracking and confirmation.
 
+### 🌍 Tour & Adventure Management
+- **Detailed Itineraries**: Comprehensive day-by-day breakdowns of activities, destinations, and highlights.
+- **Expert Instructor Assignment**: Detailed profiles for hosts and instructors, highlighting their expertise and background.
+- **Flexible Pricing Models**: Support for varied pricing tiers, including seasonal rates and occupation-based costs.
+- **Rich Media Storytelling**: Beautifully curated galleries and descriptions that bring each retreat to life.
+- **Dynamic Categorization**: Smart grouping of tours by destination (e.g., Morocco, Spain) and style (e.g., Hiking, Yoga).
+
 ### 🌍 Tour Discovery & Exploration
 - **Advanced Retreat Discovery**: Powerful search and filtering tools to find the perfect tour by destination, category, or date.
 - **Rich Tour Previews**: Comprehensive detail pages featuring itineraries, host information, and guest reviews.
