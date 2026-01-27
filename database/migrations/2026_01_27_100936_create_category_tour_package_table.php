@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Tour\TourPackage;
+use App\Models\Utilities\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,14 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
+        Schema::create('category_tour_package', function (Blueprint $table) {
+            
+            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(TourPackage::class)->constrained()->cascadeOnDelete();
 
-            $table->string('name');
-            $table->string('slug')->nullable();
-
-            $table->booleanFields();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('category_tour_package');
     }
 };

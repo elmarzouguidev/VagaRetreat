@@ -103,3 +103,7 @@ Intended for internal or client use only.
 
 ## Author
 Built with Laravel for real tour agency operations.
+
+## Packages To be Used 
+https://github.com/spatie/laravel-prefixed-ids
+https://github.com/driesvints/blade-icons

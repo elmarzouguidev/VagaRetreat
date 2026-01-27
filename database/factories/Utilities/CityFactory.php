@@ -2,12 +2,13 @@
 
 namespace Database\Factories\Utilities;
 
+use App\Models\Utilities\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Utilities\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Utilities\City>
  */
-class CategoryFactory extends Factory
+class CityFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'country_id' => Country::factory(),
+            'name' => $this->faker->city(),
             'slug' => $this->faker->slug(),
             'is_active' => true,
         ];

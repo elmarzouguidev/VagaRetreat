@@ -31,6 +31,9 @@ return new class extends Migration
             $table->mediumText('excerpt')->nullable();
             $table->longText('description')->nullable();
 
+            $table->unsignedInteger('adults_count')->default(1);
+            $table->unsignedInteger('children_count')->default(0);
+
             $table->booleanFields();
             $table->timestamps();
         });

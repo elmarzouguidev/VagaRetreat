@@ -22,3 +22,13 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+/.cursor
+/.gemini
+/.junie
+/.opencode
+AGENTS.md
+.cursorrules
+.geminiignore
+.cursorignore
+opencode.json
+GEMINI.md

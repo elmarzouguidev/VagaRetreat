@@ -43,7 +43,7 @@ class PriceFactory extends Factory
     public function inUSD(): self
     {
         return $this->state(fn(array $attributes) => [
-            'currency' => CurrencyType::USD,
+            'currency' => ConversionCurrencyType::USD,
         ]);
     }
 }
