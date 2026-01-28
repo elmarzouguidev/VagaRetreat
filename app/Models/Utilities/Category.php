@@ -2,6 +2,7 @@
 
 namespace App\Models\Utilities;
 
+use App\Models\CMS\Post;
 use App\Models\Tour\TourPackage;
 use App\Traits\GetModelByKeyName;
 use App\Traits\UuidGenerator;
@@ -21,7 +22,7 @@ class Category extends Model
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
-    */
+     */
     protected function casts(): array
     {
         return [
@@ -29,8 +30,13 @@ class Category extends Model
             'is_valid' => 'boolean',
         ];
     }
-    public function tourPackages():BelongsToMany
+    public function tourPackages(): BelongsToMany
     {
         return $this->belongsToMany(TourPackage::class);
+    }
+
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(Post::class,'post_category');
     }
 }

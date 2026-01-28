@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\CMS\Post;
 use App\Models\Tour\TourPackage;
 use App\Traits\GetModelByKeyName;
 use App\Traits\UuidGenerator;
@@ -59,5 +60,10 @@ class User extends Authenticatable
     public function tourPackages(): HasMany
     {
         return $this->hasMany(TourPackage::class);
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 }

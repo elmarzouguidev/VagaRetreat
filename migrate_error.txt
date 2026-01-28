@@ -1,0 +1,78 @@
+
+  Dropping all tables .. 392.81ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table  26.26ms DONE
+
+   INFO  Running migrations.  
+
+  0001_01_01_000000_create_users_table  119.75ms DONE
+  0001_01_01_000001_create_cache_table  49.17ms DONE
+  0001_01_01_000002_create_jobs_table  70.14ms DONE
+  2026_01_25_151451_create_permission_tables  258.51ms DONE
+  2026_01_25_154048_create_countries_table  36.30ms DONE
+  2026_01_25_154123_create_cities_table  84.00ms DONE
+  2026_01_25_200556_create_tour_packages_table  81.04ms DONE
+  2026_01_25_201033_create_tour_package_plans_table  120.39ms DONE
+  2026_01_25_204254_create_prices_table  56.43ms DONE
+  2026_01_25_212855_create_exchange_rates_table  36.29ms DONE
+  2026_01_26_144144_create_categories_table  14.64ms DONE
+  2026_01_27_083924_create_bookings_table  163.84ms DONE
+  2026_01_27_100046_add_profile_fields_to_users_table  91.72ms DONE
+  2026_01_27_100333_create_reviews_table  84.26ms DONE
+  2026_01_27_100519_create_accommodations_table  65.80ms DONE
+  2026_01_27_100932_create_tour_package_city_table  98.21ms DONE
+  2026_01_27_100936_create_tour_package_category_table  134.60ms DONE
+  2026_01_27_120418_create_media_table  69.37ms DONE
+  2026_01_27_163322_create_amenities_table  106.36ms DONE
+  2026_01_27_233633_create_pages_table  19.24ms DONE
+  2026_01_27_233919_create_posts_table  67.60ms DONE
+  2026_01_27_234037_create_post_category_table  116.48ms DONE
+
+
+   INFO  Seeding database.  
+
+  Database\Seeders\RoleSeeder  RUNNING  
+  Database\Seeders\RoleSeeder  35 ms DONE  
+
+  Database\Seeders\CountrySeeder  RUNNING  
+  Database\Seeders\CountrySeeder  24 ms DONE  
+
+  Database\Seeders\CitySeeder  RUNNING  
+  Database\Seeders\CitySeeder  576 ms DONE  
+
+  Database\Seeders\CategorySeeder  RUNNING  
+  Database\Seeders\CategorySeeder  53 ms DONE  
+
+  Database\Seeders\AmenitySeeder  RUNNING  
+  Database\Seeders\AmenitySeeder  167 ms DONE  
+
+  Database\Seeders\TourPackageSeeder  RUNNING  
+  Database\Seeders\TourPackageSeeder  19,931 ms DONE  
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'touragency.category_post' doesn't exist (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: touragency, SQL: insert into `category_post` (`category_id`, `post_id`) values (6, 1))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+    834▕             $exceptionType = $this->isUniqueConstraintError($e)
+    835▕                 ? UniqueConstraintViolationException::class
+    836▕                 : QueryException::class;
+    837▕ 
+  ➜ 838▕             throw new $exceptionType(
+    839▕                 $this->getNameWithReadWriteType(),
+    840▕                 $query,
+    841▕                 $this->prepareBindings($bindings),
+    842▕                 $e,
+
+      [2m+7 vendor frames [22m
+
+  8   database/seeders/DatabaseSeeder.php:31
+      Illuminate\Database\Eloquent\Relations\BelongsToMany::attach()
+      [2m+1 vendor frames [22m
+
+  10  database/seeders/DatabaseSeeder.php:30
+      Illuminate\Support\Collection::each()
+

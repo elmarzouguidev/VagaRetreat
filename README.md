@@ -98,6 +98,8 @@ Private project. Intended for institutional use only.
 | **Dynamic Booking - Step 2** | ![Booking Step 2](ART/screen-4.png) |
 | **Dynamic Booking - Step 3** | ![Booking Step 3](ART/screen-5.png) |
 | **Dynamic Booking - Step 4** | ![Booking Step 4](ART/screen-6.png) |
+| **Journal / Blog Index** | ![Journal Index](ART/screen-10.png) |
+| **Journal / Blog Article** | ![Journal Article](ART/screen-11.png) |
 
 ## 🤝 Contributor
 

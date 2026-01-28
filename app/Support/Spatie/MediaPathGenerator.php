@@ -10,21 +10,26 @@ class MediaPathGenerator implements BasePathGenerator
 {
     public function getPath(Media $media): string
     {
-        return $this->prifxer($media) .  '/';
+        return $this->prefixer($media) . '/';
     }
 
     public function getPathForConversions(Media $media): string
     {
-        return $this->prifxer($media) . '/conversions/';
+        return $this->prefixer($media) . '/conversions/';
     }
 
     public function getPathForResponsiveImages(Media $media): string
     {
-        return $this->prifxer($media) . '/responsive/';
+        return $this->prefixer($media) . '/responsive/';
     }
 
-    private function prifxer($media)
+    private function prefixer(Media $media): string
     {
-        return now()->format('m-Y') . '-' . $media->id . '-' . $media->uuid;
+        $date = $media->created_at ?? now();
+        $prefix = config('media-library.prefix', '');
+
+        $path = $date->format('Y/m');
+
+        return $prefix ? rtrim($prefix, '/') . '/' . $path : $path;
     }
 }

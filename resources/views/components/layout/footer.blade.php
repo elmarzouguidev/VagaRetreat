@@ -20,10 +20,10 @@
             <div>
                 <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase mb-4">Company</h3>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">About Us</a></li>
+                    <li><a href="{{ route('cms.pages.show', 'about-us') }}" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">About Us</a></li>
                     <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Careers</a></li>
                     <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Press</a></li>
-                    <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Blog</a></li>
+                    <li><a href="{{ route('blog.index') }}" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Blog</a></li>
                 </ul>
             </div>
 
@@ -42,8 +42,8 @@
              <div>
                 <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase mb-4">Legal</h3>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Privacy Policy</a></li>
-                    <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Terms of Service</a></li>
+                    <li><a href="{{ route('cms.pages.show', 'privacy-policy') }}" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Privacy Policy</a></li>
+                    <li><a href="{{ route('cms.pages.show', 'terms-and-conditions') }}" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Terms of Service</a></li>
                     <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Cookie Policy</a></li>
                 </ul>
             </div>
