@@ -31,7 +31,7 @@
             <!-- Footer Meta -->
             <div class="mt-20 pt-8 border-t border-gray-100 flex items-center justify-between">
                 <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                    Last updated: {{ $page->updated_at->format('F d, Y') }}
+                    Last updated: {{ $page->updated_at?->format('F d, Y') }}
                 </div>
                 
                 <a href="{{ route('home') }}" class="text-xs font-black text-gray-900 uppercase tracking-widest hover:text-elmarzouguidev-vaga-red transition-all border-b-2 border-transparent hover:border-elmarzouguidev-vaga-red pb-1">
