@@ -9,9 +9,10 @@ use App\Models\Utilities\Country;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
+
 class TourController extends Controller
 {
-    
+
 
 
     public function index(Request $request)
@@ -38,21 +39,20 @@ class TourController extends Controller
             ->paginate(12)
             ->appends(request()->query()); // Keep query params in pagination links
 
-
         $countries = Country::select(['id','name','slug'])->get();
 
-        $activities = Category::select(['id','name','slug'])->get();
-        
+        $activities = Category::select(['id', 'name', 'slug'])->get();
+
         if ($request->wantsJson()) {
             return response()->json($tours);
         }
 
-        return view('tours.index', compact('countries','tours','activities'));
+        return view('tours.index', compact('countries', 'tours', 'activities'));
     }
 
     public function show(TourPackage $tour)
     {
-        $tour->load(['categories:id,name,slug', 'cities:id,name,slug,country_id', 'prices','cities.country:id,name,slug', 'accommodations.amenities', 'accommodations.media']);
+        $tour->load(['categories:id,name,slug', 'cities:id,name,slug,country_id', 'prices', 'cities.country:id,name,slug', 'accommodations.amenities', 'accommodations.media']);
         if (request()->wantsJson()) {
             return response()->json($tour);
         }

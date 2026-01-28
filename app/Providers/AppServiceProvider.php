@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->addBooleanFields();
         $this->configureCommands();
-        $this->configureDates();
+       // $this->configureDates();
         $this->configureModels();
         $this->configurePasswordValidation();
         $this->configureFakePictureGenerator();
@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
     private function configureDates(): void
     {
         Date::use(CarbonImmutable::class);
-        Carbon::setLocale('fr_FR');
+       // Carbon::setLocale('fr_FR');
     }
 
     /**

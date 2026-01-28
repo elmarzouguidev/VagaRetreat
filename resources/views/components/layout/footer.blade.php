@@ -34,7 +34,7 @@
                     <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Help Center</a></li>
                     <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Safety Information</a></li>
                     <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Cancellation Options</a></li>
-                    <li><a href="#" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Contact Us</a></li>
+                    <li><a href="{{ route('contact.index') }}" class="text-sm text-gray-600 hover:text-elmarzouguidev-vaga-red transition">Contact Us</a></li>
                 </ul>
             </div>
 

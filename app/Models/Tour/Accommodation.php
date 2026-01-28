@@ -64,6 +64,6 @@ class Accommodation extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('accommodation_images')
-            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/jpg', 'image/svg', 'image/gif', 'image/bmp', 'image/tiff', 'image/avif']);
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/jpg', 'image/gif']);
     }
 }

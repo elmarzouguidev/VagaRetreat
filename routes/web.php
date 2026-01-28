@@ -4,6 +4,7 @@ use App\Http\Controllers\CMS\CMSController;
 use App\Http\Controllers\Tour\TourController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Booking\BookingController;
+use App\Http\Controllers\CMS\ContactController;
 
 Route::get('/', [TourController::class, 'index'])->name('home');
 
@@ -21,3 +22,6 @@ Route::prefix('blog')->name('blog.')->group(function () {
 Route::prefix('page')->name('cms.')->group(function () {
     Route::get('/{page:slug}', [CMSController::class, 'showPage'])->name('pages.show');
 });
+
+Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact-us', [ContactController::class, 'send'])->name('contact.post');
