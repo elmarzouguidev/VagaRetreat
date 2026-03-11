@@ -2,14 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Roles\RolesEnums;
 use App\Models\CMS\Post;
+use App\Models\User;
 use App\Models\Utilities\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    //use WithoutModelEvents; if it enabled all boot event in models not work (UuidGenerator ....)
+    // use WithoutModelEvents; if it enabled all boot event in models not work (UuidGenerator ....)
 
     /**
      * Seed the application's database.
@@ -18,6 +20,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
 
+        // Seed Admin User
+        $admin = User::factory()->create([
+            'name' => 'Admin VagaRetreat',
+            'email' => 'admin@vagaretreat.com',
+            'password' => bcrypt('password'),
+        ]);
+        $admin->assignRole(RolesEnums::SUPERADMIN->value);
+
         $this->call(CountrySeeder::class);
         $this->call(CitySeeder::class);
         $this->call(PageSeeder::class);
@@ -25,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(AmenitySeeder::class);
         $this->call(TourPackageSeeder::class);
-        
+
         // Seed CMS Posts and associate categories
         $categories = Category::all();
         Post::factory(10)->create()->each(function ($post) use ($categories) {

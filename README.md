@@ -101,6 +101,7 @@ Private project. Intended for institutional use only.
 | **Journal / Blog Index** | ![Journal Index](ART/screen-10.png) |
 | **Journal / Blog Article** | ![Journal Article](ART/screen-11.png) |
 | **Contact Page** | ![Contact Page](ART/screen-12.png) |
+| **Admin Dashboard** | ![Admin Dashboard](ART/admin-dashboard.png) |
 
 ## 🤝 Contributor
 

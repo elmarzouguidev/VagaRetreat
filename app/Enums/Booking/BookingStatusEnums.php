@@ -12,17 +12,17 @@ enum BookingStatusEnums: string
     public function label(): string
     {
         return match ($this) {
-            self::PENDING => 'En attente',
-            self::COMPLETED => 'Completé',
-            self::CONFIRMED => 'Confirmée',
-            self::CANCELLED => 'Annulée',
+            self::PENDING => 'Pending',
+            self::COMPLETED => 'Completed',
+            self::CONFIRMED => 'Confirmed',
+            self::CANCELLED => 'Cancelled',
         };
     }
 
     public static function options()
     {
         return collect(self::cases())
-            ->mapWithKeys(fn(self $type) => [
+            ->mapWithKeys(fn (self $type) => [
                 $type->value => $type->label(),
             ])
             ->toArray();

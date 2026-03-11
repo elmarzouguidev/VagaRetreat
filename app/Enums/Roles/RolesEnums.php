@@ -12,16 +12,16 @@ enum RolesEnums: string
     public function label(): string
     {
         return match ($this) {
-            self::SUPERADMIN => 'Administrateur',
+            self::SUPERADMIN => 'Administrator',
             self::CLIENT => 'Client',
-            self::INSTRUCTOR => 'Instructeur',
+            self::INSTRUCTOR => 'Instructor',
         };
     }
 
     public static function options()
     {
         return collect(self::cases())
-            ->mapWithKeys(fn(self $type) => [
+            ->mapWithKeys(fn (self $type) => [
                 $type->value => $type->label(),
             ])
             ->toArray();
