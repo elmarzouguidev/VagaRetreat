@@ -9,11 +9,17 @@
     "guidelines": true,
     "herd_mcp": false,
     "mcp": true,
+    "packages": [
+        "spatie/laravel-medialibrary",
+        "fruitcake/laravel-debugbar"
+    ],
     "sail": false,
     "skills": [
         "infer-conventions",
         "laravel-best-practices",
         "testing-best-practices",
-        "tailwindcss-development"
+        "tailwindcss-development",
+        "medialibrary-development",
+        "debug-using-debugbar"
     ]
 }
