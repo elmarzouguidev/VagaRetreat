@@ -5,12 +5,15 @@
         "opencode",
         "cursor"
     ],
+    "cloud": false,
     "guidelines": true,
     "herd_mcp": false,
     "mcp": true,
     "sail": false,
     "skills": [
-        "pest-testing",
+        "infer-conventions",
+        "laravel-best-practices",
+        "testing-best-practices",
         "tailwindcss-development"
     ]
 }
