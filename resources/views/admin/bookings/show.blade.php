@@ -58,7 +58,7 @@
                         </div>
                     </dl>
 
-                    @if($booking->special_requests)
+                    @if(!empty($booking->special_requests))
                         <div class="mt-6 pt-6 border-t border-slate-200">
                             <dt class="text-sm font-medium text-slate-700 mb-2">Special Requests</dt>
                             <dd class="text-sm text-slate-700 bg-slate-50 p-4 rounded-lg">{{ $booking->special_requests }}</dd>
