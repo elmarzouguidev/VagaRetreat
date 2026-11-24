@@ -3,7 +3,6 @@
 namespace App\ValueObjects;
 
 use App\Enums\Utilities\ConversionCurrencyType;
-use App\Enums\Utilities\CurrencyType;
 
 class Money
 {
@@ -25,6 +24,7 @@ class Money
     public function convertTo(ConversionCurrencyType $targetCurrency): self
     {
         $converted = currency()?->convert($this->amount, $this->currency, $targetCurrency);
+
         return new self($converted, $targetCurrency);
     }
 
@@ -33,6 +33,7 @@ class Money
         if ($this->currency !== $other->currency) {
             $other = $other->convertTo($this->currency);
         }
+
         return new self($this->amount + $other->amount, $this->currency);
     }
 
@@ -41,6 +42,7 @@ class Money
         if ($this->currency !== $other->currency) {
             $other = $other->convertTo($this->currency);
         }
+
         return new self($this->amount - $other->amount, $this->currency);
     }
 
@@ -54,6 +56,7 @@ class Money
         if ($divisor == 0) {
             throw new \InvalidArgumentException('Cannot divide by zero');
         }
+
         return new self($this->amount / $divisor, $this->currency);
     }
 
@@ -62,6 +65,7 @@ class Money
         if ($this->currency !== $other->currency) {
             $other = $other->convertTo($this->currency);
         }
+
         return $this->amount > $other->amount;
     }
 
@@ -70,6 +74,7 @@ class Money
         if ($this->currency !== $other->currency) {
             $other = $other->convertTo($this->currency);
         }
+
         return $this->amount < $other->amount;
     }
 
@@ -78,6 +83,7 @@ class Money
         if ($this->currency !== $other->currency) {
             $other = $other->convertTo($this->currency);
         }
+
         return abs($this->amount - $other->amount) < 0.01;
     }
 

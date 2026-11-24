@@ -4,29 +4,27 @@ namespace App\Models\Utilities;
 
 use App\Casts\MoneyCast;
 use App\Enums\Utilities\ConversionCurrencyType;
-use App\Enums\Utilities\CurrencyType;
 use App\Models\Booking\Booking;
 use App\Traits\GetModelByKeyName;
 use App\Traits\HasSlug;
 use App\Traits\PricesWithConversion;
 use App\Traits\UuidGenerator;
+use Database\Factories\Utilities\PriceFactory;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Price extends Model
 {
-
-    /** @use HasFactory<\Database\Factories\Utilities\PriceFactory> */
-    use HasFactory;
-
-    use UuidGenerator;
     use GetModelByKeyName;
-    use PricesWithConversion;
+
+    /** @use HasFactory<PriceFactory> */
+    use HasFactory;
     use HasSlug;
+    use PricesWithConversion;
+    use UuidGenerator;
 
     /**
      * Get the attributes that should be cast.
@@ -41,8 +39,8 @@ class Price extends Model
             'is_default' => 'boolean',
             'expired_at' => 'datetime',
             'options' => AsArrayObject::class,
-            //'currency' => CurrencyType::class,
-            'currency' => ConversionCurrencyType::class, // used with conversion Rate 
+            // 'currency' => CurrencyType::class,
+            'currency' => ConversionCurrencyType::class, // used with conversion Rate
             'amount' => MoneyCast::class,
         ];
     }
@@ -52,9 +50,9 @@ class Price extends Model
         return $this->morphTo();
     }
 
-    public function bookings():HasMany
+    public function bookings(): HasMany
     {
-        
+
         return $this->hasMany(Booking::class);
     }
 

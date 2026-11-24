@@ -22,6 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             Localization::class,
         ]);
 
+        $middleware->redirectGuestsTo(fn () => route('admin.login'));
+
         $middleware->alias([
             'role' => RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
@@ -33,6 +35,6 @@ return Application::configure(basePath: dirname(__DIR__))
             return response()->json([
                 'responseMessage' => 'You do not have the required authorization.',
                 'responseStatus' => 403,
-            ]);
+            ], 403);
         });
     })->create();
