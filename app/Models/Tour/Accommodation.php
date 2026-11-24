@@ -2,12 +2,13 @@
 
 namespace App\Models\Tour;
 
+use App\Traits\CanBeBooked;
 use App\Traits\GetModelByKeyName;
+use App\Traits\HasAmenities;
+use App\Traits\HasPrices;
 use App\Traits\HasSlug;
 use App\Traits\UuidGenerator;
-use App\Traits\canBeBooked;
-use App\Traits\hasPrices;
-use App\Traits\hasAmenities;
+use Database\Factories\Tour\AccommodationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,16 +17,16 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Accommodation extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\Tour\AccommodationFactory> */
-    use HasFactory;
+    use CanBeBooked;
 
-    use UuidGenerator;
     use GetModelByKeyName;
-    use hasPrices;
-    use hasAmenities;
-    use canBeBooked;
+    use HasAmenities;
+    /** @use HasFactory<AccommodationFactory> */
+    use HasFactory;
+    use HasPrices;
     use HasSlug;
     use InteractsWithMedia;
+    use UuidGenerator;
 
     protected $fillable = [
         'tour_package_id',
@@ -36,7 +37,7 @@ class Accommodation extends Model implements HasMedia
         'description',
         'sort_order',
         'is_active',
-        'is_featured'
+        'is_featured',
     ];
 
     /**

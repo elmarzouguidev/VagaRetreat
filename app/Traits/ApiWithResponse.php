@@ -7,7 +7,7 @@ namespace App\Traits;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-trait apiWithResponse
+trait ApiWithResponse
 {
     public function withResponse(Request $request, JsonResponse $response): void
     {

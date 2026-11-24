@@ -5,15 +5,13 @@ namespace App\Traits;
 use App\Models\Utilities\Amenity;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-trait hasAmenities
-{   
-    
+trait HasAmenities
+{
     /**
-     * Get all of the amenities for the etablisement.
+     * Get all of the amenities for the establishment.
      */
     public function amenities(): MorphToMany
     {
         return $this->morphToMany(Amenity::class, 'amenitable');
     }
-
 }

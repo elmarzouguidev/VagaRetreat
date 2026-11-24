@@ -5,7 +5,7 @@ namespace App\Traits;
 use App\Models\Utilities\Price;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait hasPrices
+trait HasPrices
 {
     public function prices(): MorphMany
     {

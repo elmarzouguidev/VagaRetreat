@@ -3,38 +3,38 @@
 namespace App\Models\Tour;
 
 use App\Models\User;
-use App\Models\Utilities\Amenity;
 use App\Models\Utilities\Category;
 use App\Models\Utilities\City;
-use App\Traits\canBeBooked;
+use App\Traits\CanBeBooked;
 use App\Traits\GetModelByKeyName;
-use App\Traits\hasPrices;
+use App\Traits\HasPrices;
+use App\Traits\HasReviews;
 use App\Traits\HasSlug;
 use App\Traits\UuidGenerator;
-use App\Traits\hasReviews;
+use Database\Factories\Tour\TourPackageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class TourPackage extends Model  implements HasMedia
+class TourPackage extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\Tour\TourPackageFactory> */
-    use HasFactory;
+    use CanBeBooked;
 
-    use UuidGenerator;
     use GetModelByKeyName;
-    use hasPrices;
+    /** @use HasFactory<TourPackageFactory> */
+    use HasFactory;
+    use HasPrices;
+    use HasReviews;
     use HasSlug;
-    use canBeBooked;
-    use hasReviews;
     use InteractsWithMedia;
+    use UuidGenerator;
 
     public $slugName = 'title';
+
     /**
      * Get the attributes that should be cast.
      *
@@ -74,8 +74,6 @@ class TourPackage extends Model  implements HasMedia
     {
         return $this->belongsToMany(Category::class, 'category_tour_package');
     }
-
- 
 
     public function registerMediaCollections(): void
     {
