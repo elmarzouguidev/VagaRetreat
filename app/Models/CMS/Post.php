@@ -7,6 +7,7 @@ use App\Models\Utilities\Category;
 use App\Traits\GetModelByKeyName;
 use App\Traits\HasSlug;
 use App\Traits\UuidGenerator;
+use Database\Factories\CMS\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,14 +17,13 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Post extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\CMS\PostFactory> */
-    use HasFactory;
-
-    use UuidGenerator;
     use GetModelByKeyName;
+
+    /** @use HasFactory<PostFactory> */
+    use HasFactory;
     use HasSlug;
     use InteractsWithMedia;
-
+    use UuidGenerator;
 
     public $slugName = 'title';
 
@@ -37,7 +37,7 @@ class Post extends Model implements HasMedia
         return [
             'is_active' => 'boolean',
             'is_valid' => 'boolean',
-            'published_at' => 'date'
+            'published_at' => 'date',
         ];
     }
 
@@ -55,5 +55,16 @@ class Post extends Model implements HasMedia
     {
         $this->addMediaCollection('cms_post_images')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/jpg', 'image/svg', 'image/gif', 'image/bmp', 'image/tiff', 'image/avif']);
+    }
+
+    /**
+     * Scope a query to only include published and active posts.
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('is_active', true)
+            ->where('is_valid', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 }

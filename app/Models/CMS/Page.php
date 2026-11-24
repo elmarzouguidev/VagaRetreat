@@ -5,6 +5,7 @@ namespace App\Models\CMS;
 use App\Traits\GetModelByKeyName;
 use App\Traits\HasSlug;
 use App\Traits\UuidGenerator;
+use Database\Factories\CMS\PageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -12,14 +13,13 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Page extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\CMS\PageFactory> */
-    use HasFactory;
-
-    use UuidGenerator;
     use GetModelByKeyName;
+
+    /** @use HasFactory<PageFactory> */
+    use HasFactory;
     use HasSlug;
     use InteractsWithMedia;
-
+    use UuidGenerator;
 
     public $slugName = 'title';
 
@@ -33,14 +33,24 @@ class Page extends Model implements HasMedia
         return [
             'is_active' => 'boolean',
             'is_valid' => 'boolean',
-            'published_at' => 'date'
+            'published_at' => 'date',
         ];
     }
-
 
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('cms_page_images')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/jpg', 'image/svg', 'image/gif', 'image/bmp', 'image/tiff', 'image/avif']);
+    }
+
+    /**
+     * Scope a query to only include published and active pages.
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('is_active', true)
+            ->where('is_valid', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 }

@@ -11,9 +11,8 @@ class CMSController extends Controller
 {
     public function index(): View
     {
-        $posts = Post::with(['author', 'categories'])
-            ->where('is_active', true)
-            ->where('is_valid', true)
+        $posts = Post::published()
+            ->with(['author', 'categories'])
             ->latest('published_at')
             ->paginate(9);
 
@@ -22,8 +21,7 @@ class CMSController extends Controller
 
     public function showPost(Post $post): View
     {
-        // Ensure the post is active and valid
-        if (!$post->is_active || !$post->is_valid) {
+        if (! $post->is_active || ! $post->is_valid || ! $post->published_at || $post->published_at->isFuture()) {
             abort(404);
         }
 
@@ -34,8 +32,7 @@ class CMSController extends Controller
 
     public function showPage(Page $page): View
     {
-        // Ensure the page is active and valid
-        if (!$page->is_active || !$page->is_valid) {
+        if (! $page->is_active || ! $page->is_valid || ! $page->published_at || $page->published_at->isFuture()) {
             abort(404);
         }
 
