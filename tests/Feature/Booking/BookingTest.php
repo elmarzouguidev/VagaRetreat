@@ -1,9 +1,10 @@
 <?php
 
+use App\Enums\Booking\BookingStatusEnums;
 use App\Models\Booking\Booking;
 use App\Models\Tour\TourPackage;
+use App\Models\User;
 use App\Models\Utilities\Price;
-use App\Enums\Booking\BookingStatusEnums;
 
 test('booking can be created', function () {
     $booking = Booking::factory()->create();
@@ -54,5 +55,42 @@ test('can create booking via API', function () {
     $this->assertDatabaseHas('bookings', [
         'customer_email' => 'john@example.com',
         'booking_reference' => $response->json('booking.booking_reference'),
+    ]);
+});
+
+test('cannot create booking with disallowed bookable_type', function () {
+    $price = Price::factory()->create();
+
+    $response = $this->postJson(route('bookings.store'), [
+        'bookable_type' => User::class,
+        'bookable_id' => 1,
+        'price_id' => $price->id,
+        'booking_date' => now()->addDay()->toDateString(),
+        'customer_name' => 'Attacker',
+        'customer_email' => 'attacker@example.com',
+        'customer_phone' => '1234567890',
+        'customer_country' => 'US',
+    ]);
+
+    $response->assertStatus(422)
+        ->assertJsonValidationErrors(['bookable_type']);
+});
+
+test('can update booking via API', function () {
+    $booking = Booking::factory()->create();
+
+    $response = $this->putJson(route('bookings.update', $booking), [
+        'customer_name' => 'Jane Doe',
+        'status' => BookingStatusEnums::CONFIRMED->value,
+    ]);
+
+    $response->assertStatus(200)
+        ->assertJsonPath('booking.customer_name', 'Jane Doe')
+        ->assertJsonPath('booking.status', BookingStatusEnums::CONFIRMED->value);
+
+    $this->assertDatabaseHas('bookings', [
+        'id' => $booking->id,
+        'customer_name' => 'Jane Doe',
+        'status' => BookingStatusEnums::CONFIRMED->value,
     ]);
 });
